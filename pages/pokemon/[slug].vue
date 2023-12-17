@@ -24,6 +24,13 @@ const query = gql`
           }
         )
       }
+      types {
+        id
+        nom
+        image {
+          url
+        }
+      }
     }
   }
 `;
@@ -57,11 +64,18 @@ pokemon.value = data.value.pokemon;
           <div
             class="bg-[#7f9eb6] text-white p-4 rounded-lg w-full flex justify-between"
           >
-            <div>Taille : {{ pokemon.taille }} centimètres</div>
-            <div>Poids : {{ pokemon.poids }} kilos</div>
-            <div>Couleur : <span :style="{ backgroundColor: pokemon.couleur.hex, }" class=" m-auto inline-block ml-2 mr-2 w-20 h-7 border border rounded text-center">{{ pokemon.couleur.hex }}</span></div>
-            <div>Points de vie : {{ pokemon.pv }} pvs</div>
+            <div>{{ pokemon.taille }} centimètres</div>
+            <div>{{ pokemon.poids }} kilos</div>
+            <div>
+              <span
+                :style="{ backgroundColor: pokemon.couleur.hex }"
+                class="m-auto inline-block ml-2 mr-2 w-20 h-7 border border rounded text-center"
+                >{{ pokemon.couleur.hex }}</span
+              >
+            </div>
+            <div v-for="type in pokemon.types">{{ type.nom }}</div>
 
+            <div>{{ pokemon.pv }} pvs</div>
           </div>
         </div>
         <p class="pt-2 italic">{{ pokemon.description }}</p>
