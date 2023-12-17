@@ -64,18 +64,21 @@ pokemon.value = data.value.pokemon;
           <div
             class="bg-[#7f9eb6] text-white p-4 rounded-lg w-full flex justify-between"
           >
-            <div>{{ pokemon.taille }} centimètres</div>
-            <div>{{ pokemon.poids }} kilos</div>
-            <div>
+            <p>{{ pokemon.taille }} centimètres</p>
+            <p>{{ pokemon.poids }} kilos</p>
+            <p>
               <span
                 :style="{ backgroundColor: pokemon.couleur.hex }"
                 class="m-auto inline-block ml-2 mr-2 w-20 h-7 border border rounded text-center"
                 >{{ pokemon.couleur.hex }}</span
               >
+            </p>
+            <div v-if="pokemon.types" class="">
+              <p v-for="type in pokemon.types" :key="type.nom">
+                {{ type.nom }}
+              </p>
             </div>
-            <div v-for="type in pokemon.types">{{ type.nom }}</div>
-
-            <div>{{ pokemon.pv }} pvs</div>
+            <p>{{ pokemon.pv }} pvs</p>
           </div>
         </div>
         <p class="pt-2 italic">{{ pokemon.description }}</p>
