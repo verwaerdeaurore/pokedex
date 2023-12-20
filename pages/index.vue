@@ -61,7 +61,9 @@ const filteredPokemons = computed(() => {
           <div
             class="absolute inset-0 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
           >
-            <h2 class="text-white text-lg uppercase font-semibold">{{ pokemon.nom }}</h2>
+            <h2 class="text-white text-lg uppercase font-semibold">
+              {{ pokemon.nom }}
+            </h2>
           </div>
         </div>
       </NuxtLink>
