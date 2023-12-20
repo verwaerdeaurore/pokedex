@@ -18,6 +18,17 @@ const query = gql`
         )
       }
     }
+    types {
+      nom
+      image {
+        url(
+          transformation: {
+            document: { output: { format: webp } }
+            image: { resize: { fit: crop, width: 45, height: 45 } }
+          }
+        )
+      }
+    }
   }
 `;
 
@@ -64,6 +75,15 @@ const filteredPokemons = computed(() => {
             <h2 class="text-white text-lg uppercase font-semibold">
               {{ pokemon.nom }}
             </h2>
+            <div v-if="pokemon.types" class="">
+              <p
+                v-for="type in pokemon.types"
+                :key="type.nom"
+                class="text-center lowercase text-white italic"
+              >
+                {{ type.nom }}
+              </p>
+            </div>
           </div>
         </div>
       </NuxtLink>

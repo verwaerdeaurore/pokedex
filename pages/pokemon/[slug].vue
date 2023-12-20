@@ -25,14 +25,17 @@ const query = gql`
         )
       }
       types {
-        id
         nom
         image {
-          url
+          url(
+            transformation: {
+              document: { output: { format: webp } }
+              image: { resize: { fit: crop, width: 45, height: 45 } }
+            }
+          )
         }
       }
       attaques {
-        id
         nom
         description
         degat
@@ -56,7 +59,9 @@ pokemon.value = data.value.pokemon;
   <div v-if="pokemon" class="w-full m-auto w-2/3 bg-[#f3f3f4] p-5 rounded-lg">
     <div class="flex flex-row">
       <div class="w-1/3 m-10">
-        <h2 class="text-6xl text-center tracking-widest mb-10">{{ pokemon.nom }}</h2>
+        <h2 class="text-6xl text-center tracking-widest mb-10">
+          {{ pokemon.nom }}
+        </h2>
         <NuxtImg
           :src="pokemon.image.url"
           :alt="pokemon.nom"
@@ -78,7 +83,16 @@ pokemon.value = data.value.pokemon;
               >
             </p>
             <div v-if="pokemon.types" class="">
-              <p v-for="type in pokemon.types" :key="type.nom">
+              <p
+                v-for="type in pokemon.types"
+                :key="type.nom"
+                class="flex items-center"
+              >
+                <NuxtImg
+                  :src="type.image.url"
+                  :alt="type.nom"
+                  class="mr-2 w-[30px] h-[30px]"
+                />
                 {{ type.nom }}
               </p>
             </div>
@@ -97,14 +111,14 @@ pokemon.value = data.value.pokemon;
               class="mt-2 p-2 bg-white bg-opacity-80 rounded hover:bg-opacity-100 hover:shadow-md transition duration-300 ease-in-out flex justify-between items-start"
             >
               <div>
-                <span class="font-bold uppercase text-blue-800">{{
+                <span class="font-bold uppercase text-[#2b4967]">{{
                   attaque.nom
                 }}</span>
                 <span class="ml-3 italic text-gray-600">{{
                   attaque.description
                 }}</span>
               </div>
-              <span class="text-sm font-semibold text-blue-800">
+              <span class="text-sm font-semibold text-[#2b4967]">
                 {{ attaque.degat }} PV</span
               >
             </div>
